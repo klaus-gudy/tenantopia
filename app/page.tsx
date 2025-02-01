@@ -37,7 +37,7 @@ export default function LandingPage() {
       </header>
 
       <main className="flex-1">
-        <section className="container mx-auto px-6 py-24 text-center">
+        <section className="container mx-auto px-6 pt-6 pb-12 text-center">
           <div className="max-w-3xl mx-auto space-y-6 animate-fadeIn">
             <h2 className="text-5xl font-bold tracking-tight">
               Property Management Made Simple
@@ -59,7 +59,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="bg-muted/50 py-24">
+        <section className="bg-muted/50 py-12">
           <div className="container mx-auto px-6">
             <div className="grid md:grid-cols-3 gap-8">
               {features.map((feature, index) => (
@@ -80,7 +80,7 @@ export default function LandingPage() {
       </main>
 
       <footer className="border-t">
-        <div className="container mx-auto px-6 py-8 text-center text-muted-foreground">
+        <div className="container mx-auto px-6 py-2 text-center text-muted-foreground">
           <p>© 2025 Tenantopia. All rights reserved.</p>
         </div>
       </footer>
