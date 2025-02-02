@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/shared/app-sidebar"
+import { AppSidebar } from "@/components/shared/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,15 +6,17 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
-export default function CoreLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function CoreLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -38,7 +40,9 @@ export default function CoreLayout({ children }: Readonly<{ children: React.Reac
             </Breadcrumb>
           </div>
         </header>
-        <div>{children}</div>
+        <main className="flex flex-1 overflow-y-auto">
+          <div className="container px-6 py-2">{children}</div>
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );

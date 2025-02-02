@@ -2,11 +2,8 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
-  Command,
   Construction,
   CreditCard,
-  GalleryVerticalEnd,
   Home,
   LayoutDashboard,
   Settings,
