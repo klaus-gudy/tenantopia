@@ -73,7 +73,7 @@ export default function TenantsPage() {
         {tenants.map((tenant) => (
           <div
             key={tenant.id}
-            className="flex items-center justify-between p-4 border rounded-lg"
+            className="flex items-end justify-between p-4 border rounded-lg"
           >
             <div className="flex items-center gap-4">
               <Avatar className="h-12 w-12">
@@ -92,7 +92,7 @@ export default function TenantsPage() {
                 </div>
               </div>
             </div>
-            <Button variant="secondary" asChild>
+            <Button variant="secondary" asChild className="justify-end">
               <Link href={`/tenants/${tenant.id}`}>View more</Link>
             </Button>
           </div>
