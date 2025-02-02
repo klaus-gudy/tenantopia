@@ -1,15 +1,14 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { FileText, Search } from "lucide-react";
+import { FileText } from "lucide-react";
 
 const payments: Payment[] = [
   {
     id: "1",
     tenant: "Issa Moura",
     property: "Arcade Square",
-    amount: "500,000 TZS",
+    amount: "500,000",
     status: "paid",
     date: "2024-01-01",
     dueDate: "2024-01-05",
@@ -19,7 +18,7 @@ const payments: Payment[] = [
     id: "2",
     tenant: "Emmy Wilson",
     property: "Palm Heights",
-    amount: "750,000 TZS",
+    amount: "750,000",
     status: "pending",
     date: "2024-02-01",
     dueDate: "2024-02-05",
