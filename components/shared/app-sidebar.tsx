@@ -31,28 +31,28 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: LayoutDashboard,
       isActive: true,
     },
     {
       title: "Properties",
-      url: "#",
+      url: "/property",
       icon: Home,
     },
     {
       title: "Tenants",
-      url: "#",
+      url: "/tenants",
       icon: Users,
     },
     {
       title: "Property Manager",
-      url: "#",
+      url: "/manager",
       icon: UserCog,
     },
     {
       title: "Payments",
-      url: "#",
+      url: "/payment",
       icon: CreditCard,
     },
     {
