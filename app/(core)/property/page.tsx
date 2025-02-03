@@ -54,7 +54,7 @@ export default function PropertyPage() {
             <Filter className="h-4 w-4" />
           </Button>
           <Button asChild>
-            <Link href="/properties/add">
+            <Link href="/property/add">
               <Plus className="h-4 w-4 mr-2" />
               Add a property
             </Link>

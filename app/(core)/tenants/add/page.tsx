@@ -1,4 +1,5 @@
 'use client';
+
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -60,7 +61,6 @@ export default function AddTenantPage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {/* Basic Information */}
                                 <div className="space-y-4">
-                                    <h2 className="text-lg font-medium">Basic information</h2>
 
                                     <FormField
                                         control={form.control}
@@ -156,7 +156,6 @@ export default function AddTenantPage() {
 
                                 {/* Lease Information */}
                                 <div className="space-y-4">
-                                    <h2 className="text-lg font-medium">Lease information</h2>
 
                                     <FormField
                                         control={form.control}
