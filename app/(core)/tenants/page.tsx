@@ -92,7 +92,7 @@ export default function TenantsPage() {
                 </div>
               </div>
             </div>
-            <Button variant="secondary" asChild className="justify-end">
+            <Button variant="secondary" asChild>
               <Link href={`/tenants/${tenant.id}`}>View more</Link>
             </Button>
           </div>
