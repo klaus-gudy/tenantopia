@@ -6,10 +6,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 const properties = [
     { id: 1, name: "Arcade square" },
@@ -18,7 +19,7 @@ const properties = [
     { id: 4, name: "Mountain Lodge" },
 ];
 
-const formSchema = z.object({
+const propertyManagerFormSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
     email: z.string().email("Invalid email address"),
     phone: z.string().min(10, "Phone number must be at least 10 digits"),
@@ -26,8 +27,9 @@ const formSchema = z.object({
 });
 
 export default function AddManagerPage() {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const router = useRouter();
+    const form = useForm<z.infer<typeof propertyManagerFormSchema>>({
+        resolver: zodResolver(propertyManagerFormSchema),
         defaultValues: {
             name: "",
             email: "",
@@ -52,7 +54,7 @@ export default function AddManagerPage() {
             </div>
 
             <Card>
-                <CardContent>
+                <CardContent className="pt-4">
                     <Form {...form}>
                         <form className="space-y-8">
                             <div className="grid gap-6 md:grid-cols-2">
@@ -132,17 +134,11 @@ export default function AddManagerPage() {
                                 <FormMessage />
                             </div>
 
-                            <div className="flex gap-4">
-                                <Button type="submit">
-                                    <Check className="mr-2 h-4 w-4" />
-                                    Create Property Manager
-                                </Button>
-                                <Button
-                                    type="button"
-                                    variant="outline"
-                                >
+                            <div className="flex justify-end gap-4">
+                                <Button variant="outline" type="button" onClick={() => router.push("/property")}>
                                     Cancel
                                 </Button>
+                                <Button type="submit">Save details</Button>
                             </div>
                         </form>
                     </Form>
