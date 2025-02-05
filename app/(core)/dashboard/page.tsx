@@ -44,11 +44,11 @@ export default function Page() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2 mb-6">
-        <ProfitableProperties />
         <OccupancyChart />
+        <DelinquentTenants />
+        <ProfitableProperties />
         <ExpiringLeases />
         <RecentActivity />
-        <DelinquentTenants />
       </div>
     </div>
   );
