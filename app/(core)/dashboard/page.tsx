@@ -1,5 +1,10 @@
 import { StatCard } from "@/components/dashboard/stat-card";
+import { ProfitableProperties } from "@/components/dashboard/profitable-properties";
 import { Building2, Users, Wallet, Wrench } from "lucide-react";
+import { ExpiringLeases } from "@/components/dashboard/expiring-leases";
+import { DelinquentTenants } from "@/components/dashboard/delinquent-tenants";
+import { RecentActivity } from "@/components/dashboard/recent-activity";
+import { OccupancyChart } from "@/components/dashboard/occupancy-rate";
 
 export default function Page() {
   return (
@@ -36,6 +41,14 @@ export default function Page() {
           icon={<Wrench className="h-4 w-4 text-muted-foreground" />}
           description="5 urgent, 18 routine"
         />
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2 mb-6">
+        <ProfitableProperties />
+        <OccupancyChart />
+        <ExpiringLeases />
+        <RecentActivity />
+        <DelinquentTenants />
       </div>
     </div>
   );
