@@ -24,7 +24,7 @@ const activities = [
 
 export function RecentActivity() {
   return (
-    <Card className="col-span-3">
+    <Card>
       <CardHeader>
         <CardTitle>Recent Activity</CardTitle>
       </CardHeader>
