@@ -6,3 +6,8 @@ export interface Tenant {
     duration: string;
     image: string;
 }
+
+export interface RecentTenant {
+    name: string;
+    period: string;
+}
