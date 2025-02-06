@@ -1,5 +1,4 @@
 import { StatCard } from "@/components/dashboard/stat-card";
-import { ProfitableProperties } from "@/components/dashboard/profitable-properties";
 import { Building2, Users, Wallet, Wrench } from "lucide-react";
 import { ExpiringLeases } from "@/components/dashboard/expiring-leases";
 import { DelinquentTenants } from "@/components/dashboard/delinquent-tenants";
