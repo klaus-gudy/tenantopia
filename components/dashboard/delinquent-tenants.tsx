@@ -28,7 +28,7 @@ const chartData = [
 
 const chartConfig = {
   daysOverdue: {
-    label: "Days overdue",
+    label: "Days overdue - ",
     color: "hsl(var(--chart-1))",
   },
   mobile: {
