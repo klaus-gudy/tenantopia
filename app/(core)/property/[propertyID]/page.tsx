@@ -4,6 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import RentHouse from "@/public/rent_house.png";
 import { RecentTenant } from "@/types/tenants";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const recentTenants: RecentTenant[] = [
   { name: "Mr.Remmy Ambokile", period: "Jan 2023 - Sept 2023" },
@@ -11,8 +18,12 @@ const recentTenants: RecentTenant[] = [
   { name: "Emmy Wilson", period: "Jan 2020 - Mar 2021" },
 ];
 
-export default function PropertyDetailsPage({params}: {params: {propertyID: string}}) {
-  return(
+export default function PropertyDetailsPage({
+  params,
+}: {
+  params: { propertyID: string };
+}) {
+  return (
     <div className="animate-fadeIn space-y-6">
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" asChild>
@@ -21,7 +32,8 @@ export default function PropertyDetailsPage({params}: {params: {propertyID: stri
           </Link>
         </Button>
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">Property details for {params.propertyID}
+          <h1 className="text-xl font-semibold tracking-tight">
+            Property details for {params.propertyID}
           </h1>
           <p className="text-sm text-muted-foreground">
             View more details about this property
@@ -29,7 +41,7 @@ export default function PropertyDetailsPage({params}: {params: {propertyID: stri
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-6">
           <div className="aspect-[4/3] rounded-lg overflow-hidden">
             <Image
@@ -39,59 +51,74 @@ export default function PropertyDetailsPage({params}: {params: {propertyID: stri
             />
           </div>
 
-          <div className="aspect-video rounded-lg overflow-hidden bg-muted">
+          <div className="aspect-[4/3] rounded-lg overflow-hidden bg-muted">
             <div className="w-full h-full flex items-center justify-center">
               <p className="text-muted-foreground">Map view coming soon</p>
             </div>
           </div>
         </div>
         <div className="space-y-6">
-
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Property details</h2>
-            <div className="grid gap-4">
-              <div>
-                <label className="text-sm text-muted-foreground">Address</label>
-                <p className="font-medium">365 Mkiwajuni ST</p>
+          <Card>
+            <CardHeader>
+              <CardTitle>Property details</CardTitle>
+              <CardDescription>January 2020 - December 2024</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-2 grid-cols-2">
+                <div>
+                  <label className="text-sm text-muted-foreground">
+                    Address
+                  </label>
+                  <p className="text-sm font-medium">365 Mkiwajuni ST</p>
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground">
+                    Bedrooms
+                  </label>
+                  <p className="text-sm font-medium">2 Bedroom</p>
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground">
+                    Bathroom
+                  </label>
+                  <p className="text-sm font-medium">1 Bathroom</p>
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground">
+                    Living area
+                  </label>
+                  <p className="text-sm font-medium">Yes</p>
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground">
+                    Kitchen
+                  </label>
+                  <p className="text-sm font-medium">Yes</p>
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground">
+                    Secure parking
+                  </label>
+                  <p className="text-sm font-medium">Yes</p>
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground">
+                    Monthly rent
+                  </label>
+                  <p className="text-sm font-medium">500,000 TZS</p>
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground">
+                    Min Lease terms
+                  </label>
+                  <p className="text-sm font-medium">6 Months</p>
+                </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm text-muted-foreground">Bedrooms</label>
-                  <p className="font-medium">2 Bedroom</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">Bathroom</label>
-                  <p className="font-medium">1 Bathroom</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">Living area</label>
-                  <p className="font-medium">Yes</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">Kitchen</label>
-                  <p className="font-medium">Yes</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">Secure parking</label>
-                  <p className="font-medium">Yes</p>
-                </div>
+              <div className="flex gap-4 mt-4">
+                <Button variant="outline">Edit details</Button>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="text-sm text-muted-foreground">Monthly rent</label>
-                <p className="font-medium">500,000 TZS</p>
-              </div>
-              <div>
-                <label className="text-sm text-muted-foreground">Lease terms</label>
-                <p className="font-medium">6 Months</p>
-              </div>                
-              </div>
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            <Button variant="outline">Edit details</Button>
-          </div>
+            </CardContent>
+          </Card>
 
           <div className="space-y-4">
             <h2 className="text-lg font-semibold">Recent tenants</h2>
@@ -99,15 +126,15 @@ export default function PropertyDetailsPage({params}: {params: {propertyID: stri
               {recentTenants.map((tenant, index) => (
                 <div key={index} className="flex justify-between items-center">
                   <span className="text-sm font-medium">{tenant.name}</span>
-                  <span className="text-sm text-muted-foreground">{tenant.period}</span>
+                  <span className="text-sm text-muted-foreground">
+                    {tenant.period}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
-  )
+  );
 }
