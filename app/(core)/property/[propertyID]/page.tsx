@@ -11,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 
 const recentTenants: RecentTenant[] = [
   { name: "Mr.Remmy Ambokile", period: "Jan 2023 - Sept 2023" },
@@ -52,11 +51,14 @@ export default function PropertyDetailsPage({
             />
           </div>
 
-          <div className="aspect-[4/3] rounded-lg overflow-hidden bg-muted">
-            <div className="w-full h-full flex items-center justify-center">
-              <p className="text-muted-foreground">Map view coming soon</p>
+          <Card>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden bg-muted">
+              <div className="w-full h-full flex items-center justify-center">
+                <p className="text-muted-foreground">Map view coming soon</p>
+              </div>
             </div>
-          </div>
+          </Card>
+          
         </div>
         <div className="space-y-6">
           <Card>
@@ -128,7 +130,10 @@ export default function PropertyDetailsPage({
             <CardContent>
               <div className="space-y-4">
                 {recentTenants.map((tenant, index) => (
-                  <div key={index} className="flex justify-between items-center">
+                  <div
+                    key={index}
+                    className="flex justify-between items-center"
+                  >
                     <span className="text-sm font-medium">{tenant.name}</span>
                     <span className="text-sm text-muted-foreground">
                       {tenant.period}
