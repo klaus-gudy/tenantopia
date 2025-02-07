@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { PropertyTimeline } from "@/components/property/property-timeline";
 
 const recentTenants: RecentTenant[] = [
   { name: "Mr.Remmy Ambokile", period: "Jan 2023 - Sept 2023" },
@@ -57,6 +58,27 @@ export default function PropertyDetailsPage({
                 <p className="text-muted-foreground">Map view coming soon</p>
               </div>
             </div>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Recent tenants</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {recentTenants.map((tenant, index) => (
+                  <div
+                    key={index}
+                    className="flex justify-between items-center"
+                  >
+                    <span className="text-sm font-medium">{tenant.name}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {tenant.period}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
           </Card>
           
         </div>
@@ -123,26 +145,7 @@ export default function PropertyDetailsPage({
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent tenants</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {recentTenants.map((tenant, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between items-center"
-                  >
-                    <span className="text-sm font-medium">{tenant.name}</span>
-                    <span className="text-sm text-muted-foreground">
-                      {tenant.period}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          <PropertyTimeline />
         </div>
       </div>
     </div>
