@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { TenantTimeline } from "@/components/tenant/tenant-timeline";
 
 export default function TenantDetailsPage({
   params,
@@ -42,7 +43,7 @@ export default function TenantDetailsPage({
               </Avatar>
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-lg font-medium">Issa Moura</h3>
+                  <h3 className="font-medium leading-none tracking-tight">Issa Moura</h3>
                   <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                     Active
                   </span>
@@ -131,67 +132,7 @@ export default function TenantDetailsPage({
             </div>
           </Card>
 
-          <Card className="p-6">
-            <CardHeader>
-              <CardTitle>Lease and payment history</CardTitle>
-              <CardDescription>Showing history of lease and payments for the past 6 months </CardDescription>
-            </CardHeader>
-            <div className="space-y-4">
-              <div className="relative pl-6 border-l">
-                <div className="absolute left-0 top-2 w-2 h-2 -translate-x-[5px] rounded-full bg-primary"></div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-muted-foreground">22 Dec 2024</p>
-                    <p className="font-medium">Contract renewal</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-sm text-muted-foreground">
-                        Lease_agreement_2024.pdf
-                      </span>
-                      <Button variant="ghost" size="icon">
-                        <Download className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative pl-6 border-l">
-                <div className="absolute left-0 top-2 w-2 h-2 -translate-x-[5px] rounded-full bg-primary"></div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-muted-foreground">23 Dec 2023</p>
-                    <p className="font-medium">Payment deposit</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-sm text-muted-foreground">
-                        Bank_statement_dec_2023.pdf
-                      </span>
-                      <Button variant="ghost" size="icon">
-                        <Download className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative pl-6">
-                <div className="absolute left-0 top-2 w-2 h-2 -translate-x-[5px] rounded-full bg-primary"></div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-muted-foreground">22 Dec 2023</p>
-                    <p className="font-medium">Initial contract signing</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-sm text-muted-foreground">
-                        Lease_agreement_2023.pdf
-                      </span>
-                      <Button variant="ghost" size="icon">
-                        <Download className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
+          <TenantTimeline />
         </div>
       </div>
     );
