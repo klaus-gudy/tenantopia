@@ -19,7 +19,7 @@ const properties: Property[] = [
   {
     id: 2,
     name: "Mwenge",
-    address: "Mwenge Shopping Center",
+    address: "Mwenge St",
     manager: "Juma Juma",
     status: "Vacant",
     vacantDate: "01/01/24",
@@ -28,7 +28,7 @@ const properties: Property[] = [
   {
     id: 3,
     name: "Mlimani City",
-    address: "Mlimani City, Dar es Salaam",
+    address: "Survey",
     manager: "Salim Salim",
     status: "Occupied",
     vacantDate: "01/04/24",
