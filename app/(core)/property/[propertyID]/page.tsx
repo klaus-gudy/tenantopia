@@ -3,7 +3,6 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import RentHouse from "@/public/rent_house.png";
-import { RecentTenant } from "@/types/tenants";
 import {
   Card,
   CardContent,
@@ -12,12 +11,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { PropertyTimeline } from "@/components/property/property-timeline";
-
-const recentTenants: RecentTenant[] = [
-  { name: "Mr.Remmy Ambokile", period: "Jan 2023 - Sept 2023" },
-  { name: "Jesca Malisa", period: "Mar 2021 - Dec 2022" },
-  { name: "Emmy Wilson", period: "Jan 2020 - Mar 2021" },
-];
 
 export default function PropertyDetailsPage({
   params,
@@ -52,37 +45,6 @@ export default function PropertyDetailsPage({
             />
           </div>
 
-          <Card>
-            <div className="aspect-[4/3] rounded-lg overflow-hidden bg-muted">
-              <div className="w-full h-full flex items-center justify-center">
-                <p className="text-muted-foreground">Map view coming soon</p>
-              </div>
-            </div>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent tenants</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {recentTenants.map((tenant, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between items-center"
-                  >
-                    <span className="text-sm font-medium">{tenant.name}</span>
-                    <span className="text-sm text-muted-foreground">
-                      {tenant.period}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-          
-        </div>
-        <div className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>Property details</CardTitle>
@@ -144,7 +106,15 @@ export default function PropertyDetailsPage({
               </div>
             </CardContent>
           </Card>
-
+        </div>
+        <div className="space-y-6">
+          <Card>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden bg-muted">
+              <div className="w-full h-full flex items-center justify-center">
+                <p className="text-muted-foreground">Map view coming soon</p>
+              </div>
+            </div>
+          </Card>
           <PropertyTimeline />
         </div>
       </div>
