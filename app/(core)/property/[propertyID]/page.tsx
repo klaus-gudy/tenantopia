@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { PropertyTimeline } from "@/components/property/property-timeline";
+import { LeaseApplicationDialog } from "@/components/property/lease-application-dialog";
 
 export default function PropertyDetailsPage({
   params,
@@ -103,6 +104,7 @@ export default function PropertyDetailsPage({
               </div>
               <div className="flex gap-4 mt-4">
                 <Button variant="outline">Edit details</Button>
+                <LeaseApplicationDialog />
               </div>
             </CardContent>
           </Card>
