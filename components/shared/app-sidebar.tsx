@@ -57,7 +57,7 @@ const data = {
     },
     {
       title: "Maintenance",
-      url: "#",
+      url: "/maintenance",
       icon: Construction,
     },
     {
