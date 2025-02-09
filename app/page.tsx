@@ -42,7 +42,7 @@ export default function LandingPage() {
             <h2 className="text-5xl font-bold tracking-tight">
               Property Management Made Simple
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-lg text-muted-foreground">
               Streamline your property management with our intuitive platform.
               Manage properties, tenants, and documents all in one place.
             </p>
@@ -68,10 +68,10 @@ export default function LandingPage() {
                   className="p-6 rounded-lg bg-background border animate-fadeIn"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <h3 className="text-xl font-semibold mb-2">
+                  <h3 className="text-lg font-semibold mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
+                  <p className="text-[15px] text-muted-foreground">{feature.description}</p>
                 </div>
               ))}
             </div>
