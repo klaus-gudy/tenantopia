@@ -31,7 +31,7 @@ const DynamicBreadcrumbs = () => {
     const formatted = segment.split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
-    return isFirstSegment ? `${formatted} Page` : formatted;
+    return isFirstSegment ? `${formatted} page` : formatted;
   };
 
   return (

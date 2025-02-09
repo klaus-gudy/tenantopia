@@ -39,7 +39,7 @@ export default function ManagerPage() {
         <div className="animate-fadeIn space-y-4">
             <div className="flex flex-col gap-2">
                 <h1 className="text-xl font-semibold tracking-tight">
-                    Property Managers
+                    Property managers
                 </h1>
                 <p className="text-sm text-muted-foreground">
                     Manage your property managers and their assignments
@@ -50,7 +50,7 @@ export default function ManagerPage() {
                 <Button asChild>
                     <Link href="/manager/add">
                         <Plus className="h-4 w-4 mr-2" />
-                        Create a Manager
+                        Create a manager
                     </Link>
                 </Button>
             </div>
@@ -76,7 +76,7 @@ export default function ManagerPage() {
                         </div>
                         <div className="mt-4">
                             <p className="text-sm font-medium text-muted-foreground">
-                                Assigned Properties
+                                Assigned properties
                             </p>
                             <div className="mt-2 flex -space-x-2">
                                 {getPropertyNames(manager.properties).map((name, index) => (

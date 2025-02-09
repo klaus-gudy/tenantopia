@@ -44,9 +44,9 @@ export default function PaymentPage() {
               <TableHead>Property</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Payment Date</TableHead>
-              <TableHead>Due Date</TableHead>
-              <TableHead>Agreement Duration</TableHead>
+              <TableHead>Payment date</TableHead>
+              <TableHead>Due date</TableHead>
+              <TableHead>Agreement duration</TableHead>
               <TableHead>Contract</TableHead>
             </TableRow>
           </TableHeader>
