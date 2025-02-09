@@ -1,3 +1,7 @@
+'use client'
+
+import { usePathname } from 'next/navigation';
+import React from "react";
 import { AppSidebar } from "@/components/shared/app-sidebar";
 import {
   Breadcrumb,
@@ -14,6 +18,50 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 
+const DynamicBreadcrumbs = () => {
+  const pathname = usePathname();
+  const pathSegments = pathname
+    .split('/')
+    .filter(segment => segment !== '');
+  if (pathSegments.length === 0) {
+    return null;
+  }
+
+  const formatSegment = (segment: string, isFirstSegment: boolean) => {
+    const formatted = segment.split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+    return isFirstSegment ? `${formatted} Page` : formatted;
+  };
+
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        {pathSegments.map((segment, index) => {
+          const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
+          const isLast = index === pathSegments.length - 1;
+          const isFirst = index === 0;
+
+          return (
+            <React.Fragment key={segment}>
+              {index > 0 && <BreadcrumbSeparator className="hidden md:block" />}
+              <BreadcrumbItem>
+                {isLast ? (
+                  <BreadcrumbPage>{formatSegment(segment, isFirst)}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink href={href}>
+                    {formatSegment(segment, isFirst)}
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+            </React.Fragment>
+          );
+        })}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+};
+
 export default function CoreLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -25,19 +73,7 @@ export default function CoreLayout({
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+            <DynamicBreadcrumbs />
           </div>
         </header>
         <main className="flex flex-1 overflow-y-auto">
