@@ -1,15 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import {  Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TenantTimeline } from "@/components/tenant/tenant-timeline";
+import { LeaseRenewalDialog } from "@/components/tenant/lease-renewal-dialog";
 
 export default function TenantDetailsPage({
   params,
@@ -127,6 +122,7 @@ export default function TenantDetailsPage({
                       Edit details
                     </Link>
                   </Button>
+                  <LeaseRenewalDialog />
                 </div>
               </div>
             </div>
