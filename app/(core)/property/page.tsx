@@ -39,7 +39,7 @@ const properties: Property[] = [
 export default function PropertyPage() {
   return (
     <div className="animate-fadeIn space-y-4">
-      <div className="flex flex-col gap-2">
+      <div>
         <h1 className="text-xl font-semibold tracking-tight">Property listing</h1>
         <p className="text-sm text-muted-foreground">Manage your properties</p>
       </div>

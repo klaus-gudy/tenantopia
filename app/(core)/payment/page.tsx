@@ -29,7 +29,7 @@ const payments: Payment[] = [
 export default function PaymentPage() {
   return (
     <div className="animate-fadeIn space-y-4">
-      <div className="flex flex-col gap-2">
+      <div>
         <h1 className="text-xl font-semibold tracking-tight">Payments</h1>
         <p className="text-sm text-muted-foreground">
           Manage and track all property payments

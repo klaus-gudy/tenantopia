@@ -43,12 +43,9 @@ const tenants: Tenant[] = [
 export default function TenantsPage() {
   return (
     <div className="space-y-4">
-      <div className="flex flex-col gap-2">
+      <div>
         <h1 className="text-xl font-semibold tracking-tight">Tenants</h1>
-        <p className="text-sm text-muted-foreground">
-          {" "}
-          See all possible tenants available in your property
-        </p>
+        <p className="text-sm text-muted-foreground">See all possible tenants available in your property</p>
       </div>
 
       <div className="flex items-center justify-between gap-4 flex-wrap">

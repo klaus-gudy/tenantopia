@@ -24,7 +24,7 @@ const maintenanceRequests: MaintenanceRequest[] = [
 export default function MaintainancePage() {
   return (
     <div className="animate-fadeIn space-y-4">
-      <div className="flex flex-col gap-2">
+      <div>
         <h1 className="text-xl font-semibold tracking-tight">
           Maintenance request
         </h1>

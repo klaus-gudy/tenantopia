@@ -37,13 +37,11 @@ export default function ManagerPage() {
 
     return (
         <div className="animate-fadeIn space-y-4">
-            <div className="flex flex-col gap-2">
+            <div>
                 <h1 className="text-xl font-semibold tracking-tight">
                     Property managers
                 </h1>
-                <p className="text-sm text-muted-foreground">
-                    Manage your property managers and their assignments
-                </p>
+                <p className="text-sm text-muted-foreground">Manage your property managers and their assignments</p>
             </div>
 
             <div className="flex items-center justify-end gap-4 flex-wrap">
