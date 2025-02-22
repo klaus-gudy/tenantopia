@@ -13,8 +13,159 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  OWNER
+  MANAGER
+  TENANT
+}
+
+enum MaintenanceUrgency {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum MaintenanceStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum LeaseStatus {
+  ACTIVE
+  EXPIRED
+  RENEWED
+  TERMINATED
+}
+
+enum TransactionType {
+  RENT
+  DEPOSIT
+  FEE
+  MAINTENANCE
+}
+
 model User {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  phone     String
+  role      UserRole
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tenant    Tenant?
+  owner     Owner?
+  manager   Manager?
+}
+
+model Tenant {
+  id                  String               @id @default(uuid())
+  isActive            Boolean
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  userId              String               @unique
+  user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  leases              LeaseAgreement[]
+  maintenanceRequests MaintenanceRequest[]
+  transactions        Transaction[]
+}
+
+model Owner {
+  id         String     @id @default(uuid())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  userId     String     @unique
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  properties Property[]
+}
+
+model Manager {
+  id                 String     @id @default(uuid())
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+  userId             String     @unique
+  user               User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assignedProperties Property[]
+}
+
+model Property {
+  id          String   @id @default(uuid())
+  name        String
+  type        String
+  city        String
+  district    String
+  street      String
+  address     String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  managerId   String?
+  manager     Manager? @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  ownerId     String
+  owner       Owner    @relation(fields: [ownerId], references: [id])
+  units       Unit[]
+}
+
+model Unit {
+  id                  String               @id @default(uuid())
+  name                String
+  description         String
+  size                Float
+  price               Float
+  rooms               Int
+  kitchen             Boolean
+  bathroom            Boolean
+  livingRoom          Boolean
+  balcony             Boolean
+  parking             Boolean
+  isOccupied          Boolean
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  propertyId          String
+  property            Property             @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  leases              LeaseAgreement[]
+  maintenanceRequests MaintenanceRequest[]
+  transactions        Transaction[]
+}
+
+model LeaseAgreement {
+  id        String      @id @default(uuid())
+  startDate DateTime
+  endDate   DateTime
+  status    LeaseStatus
+  document  String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  tenantId  String
+  tenant    Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  unitId    String
+  unit      Unit        @relation(fields: [unitId], references: [id], onDelete: Cascade)
+}
+
+model Transaction {
+  id        String          @id @default(uuid())
+  type      TransactionType @default(RENT)
+  amount    Float
+  date      DateTime
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  tenantId  String
+  tenant    Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  unitId    String
+  unit      Unit            @relation(fields: [unitId], references: [id], onDelete: Cascade)
+}
+
+model MaintenanceRequest {
+  id          String             @id @default(uuid())
+  title       String
+  description String
+  urgency     MaintenanceUrgency @default(LOW)
+  status      MaintenanceStatus  @default(PENDING)
+  submittedAt DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  resolvedAt  DateTime?
+  unitId      String
+  unit        Unit               @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  tenantId    String
+  tenant      Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 }
