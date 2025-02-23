@@ -23,7 +23,6 @@ export async function POST(req: Request) {
                 address: body.address,
                 description: body.description,
                 ownerId: body.ownerId,
-                managerId: body.managerId || null,
             },
         });
 
