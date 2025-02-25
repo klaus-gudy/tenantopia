@@ -8,6 +8,19 @@ interface Property {
     image: string;
 }
 
+interface Unit {
+    id: string;
+    number: string;
+    bedrooms: number;
+    bathrooms: boolean;
+    kitchen: boolean;
+    livingRoom: boolean;
+    minLeaseTerm: number;
+    property: Property;
+    monthlyRent: number;
+    status: "Occupied" | "Vacant";
+}
+
 interface TimelineEvent {
     id: string
     date: Date
