@@ -16,7 +16,6 @@ interface Unit {
     kitchen: boolean;
     livingRoom: boolean;
     minLeaseTerm: number;
-    property: Property;
     monthlyRent: number;
     status: "Occupied" | "Vacant";
 }
