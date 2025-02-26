@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Filter, Plus, Search } from "lucide-react";
+import { Building, Filter, Home, MapPin, Plus, Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import RentHouse from "@/public/rent_house.png";
@@ -11,6 +11,9 @@ const properties: Property[] = [
     id: 1,
     name: "Arcade square",
     address: "365 Mkiwajuni ST",
+    type: "Apartment",
+    units: 10,
+    availableUnits: 5,
     manager: "Issa Moura",
     status: "Occupied",
     vacantDate: "01/02/24",
@@ -20,6 +23,9 @@ const properties: Property[] = [
     id: 2,
     name: "Mwenge",
     address: "Mwenge St",
+    type: "Condo",
+    units: 10,
+    availableUnits: 5,
     manager: "Juma Juma",
     status: "Vacant",
     vacantDate: "01/01/24",
@@ -29,6 +35,9 @@ const properties: Property[] = [
     id: 3,
     name: "Mlimani City",
     address: "Survey",
+    type: "Apartment",
+    units: 10,
+    availableUnits: 5,
     manager: "Salim Salim",
     status: "Occupied",
     vacantDate: "01/04/24",
@@ -40,7 +49,9 @@ export default function PropertyPage() {
   return (
     <div className="animate-fadeIn space-y-4">
       <div>
-        <h1 className="text-xl font-semibold tracking-tight">Property listing</h1>
+        <h1 className="text-xl font-semibold tracking-tight">
+          Property listing
+        </h1>
         <p className="text-sm text-muted-foreground">Manage your properties</p>
       </div>
 
@@ -74,12 +85,12 @@ export default function PropertyPage() {
               <div className="absolute top-2 left-2">
                 <span
                   className={`px-2 py-1 rounded-full text-xs ${
-                    property.status === "Occupied"
+                    property.type === "Apartment"
                       ? "bg-green-100 text-green-700"
                       : "bg-yellow-100 text-yellow-700"
                   }`}
                 >
-                  {property.status}
+                  {property.type}
                 </span>
               </div>
             </div>
@@ -87,18 +98,24 @@ export default function PropertyPage() {
               <div className="flex justify-between gap-4 items-center">
                 <div>
                   <p className="text-sm font-medium">{property.name}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {property.address}
-                  </p>
+                  <div className="flex items-center text-muted-foreground mt-2">
+                    <MapPin className="h-4 w-4 mr-1" />
+                    <p className="text-sm truncate">{property.address}</p>
+                  </div>
                 </div>
                 <div>
-                  <p className="text-sm font-medium">{property.manager}</p>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>Vacant on - {property.vacantDate}</span>
+                  <div className="flex items-center">
+                    <span className="text-sm">{property.units} Units</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mt-2">
+                    <Building className="h-4 w-4 mr-1" />
+                    <span className="text-sm">
+                      {property.availableUnits} Available
+                    </span>
                   </div>
                 </div>
               </div>
-              <Button variant="secondary" size="sm" className="w-full" asChild>
+              <Button variant="secondary" className="w-full" asChild>
                 <Link href={`/property/${property.id}`}>View listing</Link>
               </Button>
             </div>

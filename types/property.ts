@@ -2,6 +2,9 @@ interface Property {
     id: number;
     name: string;
     address: string;
+    type: string;
+    units: number;
+    availableUnits: number;
     manager: string;
     status: "Occupied" | "Vacant";
     vacantDate: string;
