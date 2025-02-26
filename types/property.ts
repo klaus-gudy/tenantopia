@@ -12,6 +12,7 @@ interface Unit {
     id: string;
     number: string;
     bedrooms: number;
+    livingArea: boolean;
     bathrooms: boolean;
     kitchen: boolean;
     livingRoom: boolean;

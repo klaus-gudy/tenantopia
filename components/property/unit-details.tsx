@@ -18,6 +18,7 @@ const initialUnit: Unit[] = [
     id: "1",
     number: "101",
     bedrooms: 2,
+    livingArea: true,
     bathrooms: true,
     kitchen: true,
     livingRoom: true,
@@ -42,7 +43,7 @@ export default function UnitDetails() {
         <h2 className="text-lg font-semibold">Units</h2>
         <Dialog>
           <DialogTrigger asChild>
-            <Button size="sm">
+            <Button size="default">
               <Plus className="h-4 w-4 mr-2" />
               Add Unit
             </Button>

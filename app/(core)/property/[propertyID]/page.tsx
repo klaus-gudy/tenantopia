@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { PropertyTimeline } from "@/components/property/property-timeline";
 import { LeaseApplicationDialog } from "@/components/property/lease-application-dialog";
+import UnitDetails from "@/components/property/unit-details";
 
 export default function PropertyDetailsPage({
   params,
@@ -117,7 +118,11 @@ export default function PropertyDetailsPage({
               </div>
             </div>
           </Card>
-          <PropertyTimeline />
+          <UnitDetails />
+          {/* <PropertyTimeline /> */}
+        </div>
+        <div className="space-y-6">
+          {/* <UnitDetails /> */}
         </div>
       </div>
     </div>
