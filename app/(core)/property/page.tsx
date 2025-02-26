@@ -75,7 +75,7 @@ export default function PropertyPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {properties.map((property) => (
-          <Card key={property.id} className="overflow-hidden">
+          <Card key={property.id} className="hover:shadow-md transition-shadow overflow-hidden">
             <div className="relative aspect-video">
               <Image
                 src={RentHouse}
