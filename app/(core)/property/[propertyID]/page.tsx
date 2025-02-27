@@ -1,23 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-import RentHouse from "@/public/rent_house.png";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PropertyTimeline } from "@/components/property/property-timeline";
-import { LeaseApplicationDialog } from "@/components/property/lease-application-dialog";
 import UnitDetails from "@/components/property/unit-details";
 
 export default function PropertyDetailsPage({
-  params,
+  searchParams,
 }: {
-  params: { propertyID: string };
+  searchParams: {name: string};
 }) {
   return (
     <div className="animate-fadeIn space-y-6">
@@ -29,7 +24,7 @@ export default function PropertyDetailsPage({
         </Button>
         <div>
           <h1 className="text-xl font-semibold tracking-tight">
-            Property details for {params.propertyID}
+          {searchParams.name} details
           </h1>
           <p className="text-sm text-muted-foreground">
             View more details about this property
@@ -39,18 +34,9 @@ export default function PropertyDetailsPage({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-6">
-          <div className="aspect-[4/3] rounded-lg overflow-hidden">
-            <Image
-              src={RentHouse}
-              alt="Property name"
-              className="object-cover w-full h-full"
-            />
-          </div>
-
           <Card>
             <CardHeader>
               <CardTitle>Property details</CardTitle>
-              <CardDescription>January 2020 - December 2024</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-2 grid-cols-2">
@@ -62,55 +48,35 @@ export default function PropertyDetailsPage({
                 </div>
                 <div>
                   <label className="text-sm text-muted-foreground">
-                    Bedrooms
+                    Property type
                   </label>
-                  <p className="text-sm font-medium">2 Bedroom</p>
+                  <p className="text-sm font-medium">Residential</p>
                 </div>
                 <div>
                   <label className="text-sm text-muted-foreground">
-                    Bathroom
+                    Year built
                   </label>
-                  <p className="text-sm font-medium">1 Bathroom</p>
+                  <p className="text-sm font-medium">2010</p>
                 </div>
                 <div>
                   <label className="text-sm text-muted-foreground">
-                    Living area
+                    Total square footage
                   </label>
-                  <p className="text-sm font-medium">Yes</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Kitchen
-                  </label>
-                  <p className="text-sm font-medium">Yes</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Secure parking
-                  </label>
-                  <p className="text-sm font-medium">Yes</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Monthly rent
-                  </label>
-                  <p className="text-sm font-medium">500,000 TZS</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Min Lease terms
-                  </label>
-                  <p className="text-sm font-medium">6 Months</p>
+                  <p className="text-sm font-medium">1,500 sq ft</p>
                 </div>
               </div>
-              <div className="flex gap-4 mt-4">
-                <Button variant="outline">Edit details</Button>
-                <LeaseApplicationDialog />
+              <div className="mt-2">
+                  <label className="text-sm text-muted-foreground">
+                    Address
+                  </label>
+                  <p className="text-sm font-medium">A beautiful apartment complex with modern amenities, located in the heart of Los Angeles with easy access to public transportation, shopping centers, and entertainment venues.</p>
+                </div>
+              <div className="flex gap-4 mt-4 justify-end">
+                <Button>Edit details</Button>
               </div>
             </CardContent>
           </Card>
-        </div>
-        <div className="space-y-6">
+
           <Card>
             <div className="aspect-[4/3] rounded-lg overflow-hidden bg-muted">
               <div className="w-full h-full flex items-center justify-center">
@@ -118,11 +84,10 @@ export default function PropertyDetailsPage({
               </div>
             </div>
           </Card>
-          <UnitDetails />
-          {/* <PropertyTimeline /> */}
         </div>
+
         <div className="space-y-6">
-          {/* <UnitDetails /> */}
+          <UnitDetails />
         </div>
       </div>
     </div>
