@@ -10,8 +10,10 @@ import {
 import UnitDetails from "@/components/property/unit-details";
 
 export default function PropertyDetailsPage({
+  params,
   searchParams,
 }: {
+  params: {propertyID: string};
   searchParams: {name: string};
 }) {
   return (
@@ -67,7 +69,7 @@ export default function PropertyDetailsPage({
               </div>
               <div className="mt-2">
                   <label className="text-sm text-muted-foreground">
-                    Address
+                    Description
                   </label>
                   <p className="text-sm font-medium">A beautiful apartment complex with modern amenities, located in the heart of Los Angeles with easy access to public transportation, shopping centers, and entertainment venues.</p>
                 </div>
@@ -87,7 +89,7 @@ export default function PropertyDetailsPage({
         </div>
 
         <div className="space-y-6">
-          <UnitDetails />
+          <UnitDetails propertyID={params.propertyID} />
         </div>
       </div>
     </div>

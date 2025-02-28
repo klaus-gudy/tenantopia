@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Building, Filter, Home, MapPin, Plus, Search } from "lucide-react";
+import { Building, Filter, MapPin, Plus, Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import RentHouse from "@/public/rent_house.png";

@@ -22,6 +22,7 @@ interface Unit {
     minLeaseTerm: number;
     monthlyRent: number;
     status: "Occupied" | "Vacant";
+    tenant?: string;
 }
 
 interface TimelineEvent {
