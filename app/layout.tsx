@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { montserrat } from './fonts/fonts';
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "Tenantopia",
@@ -13,6 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <SessionProvider >
     <html lang="en">
       <body
         className={montserrat.className}
@@ -20,5 +22,6 @@ export default function RootLayout({
         {children}
       </body>
     </html>
+    </SessionProvider>
   );
 }
