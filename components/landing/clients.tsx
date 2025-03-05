@@ -21,7 +21,7 @@ export function UserCard({
         <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-muted">
           <Icon className="h-6 w-6 text-primary" />
         </div>
-        <CardTitle className="text-xl font-semibold">{title}</CardTitle>
+        <CardTitle className="text-xl font-semibold text-primary">{title}</CardTitle>
         <CardDescription className="text-muted-foreground">
           {description}
         </CardDescription>
