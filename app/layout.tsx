@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { montserrat } from './fonts/fonts';
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
   title: "Tenantopia",
@@ -21,6 +22,7 @@ export default function RootLayout({
       >
         {children}
       </body>
+      <Toaster />
     </html>
     </SessionProvider>
   );
