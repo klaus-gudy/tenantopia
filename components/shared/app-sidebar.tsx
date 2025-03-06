@@ -10,7 +10,7 @@ import {
   UserCog,
   Users
 } from "lucide-react"
-
+import { useSession } from "next-auth/react"
 import { NavMain } from "@/components/shared/nav-main"
 import { NavUser } from "@/components/shared/nav-user"
 import { TeamSwitcher } from "@/components/shared/team-switcher"
@@ -22,53 +22,54 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
-const data = {
-  user: {
-    name: "Admin",
-    email: "admin@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "/dashboard",
-      icon: LayoutDashboard,
-      isActive: true,
-    },
-    {
-      title: "Properties",
-      url: "/property",
-      icon: Home,
-    },
-    {
-      title: "Tenants",
-      url: "/tenants",
-      icon: Users,
-    },
-    {
-      title: "Property Manager",
-      url: "/manager",
-      icon: UserCog,
-    },
-    {
-      title: "Payments",
-      url: "/payment",
-      icon: CreditCard,
-    },
-    {
-      title: "Maintenance",
-      url: "/maintenance",
-      icon: Construction,
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings,
-    },
-  ],
-}
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: session, status } = useSession();
+  const data = {
+    user: {
+      name: session?.user?.name || "User",
+      email: session?.user?.email || "",
+      avatar: "/avatars/shadcn.jpg",
+    },
+    navMain: [
+      {
+        title: "Dashboard",
+        url: "/dashboard",
+        icon: LayoutDashboard,
+        isActive: true,
+      },
+      {
+        title: "Properties",
+        url: "/property",
+        icon: Home,
+      },
+      {
+        title: "Tenants",
+        url: "/tenants",
+        icon: Users,
+      },
+      {
+        title: "Property Manager",
+        url: "/manager",
+        icon: UserCog,
+      },
+      {
+        title: "Payments",
+        url: "/payment",
+        icon: CreditCard,
+      },
+      {
+        title: "Maintenance",
+        url: "/maintenance",
+        icon: Construction,
+      },
+      {
+        title: "Settings",
+        url: "#",
+        icon: Settings,
+      },
+    ],
+  }
+  
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
