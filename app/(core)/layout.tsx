@@ -1,11 +1,9 @@
-'use client'
+"use client";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import {
-  usePathname,
-  useRouter
-} from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { AppSidebar } from "@/components/shared/app-sidebar";
 import {
@@ -23,19 +21,20 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 
+const queryClient = new QueryClient();
+
 const DynamicBreadcrumbs = () => {
   const pathname = usePathname();
-  const pathSegments = pathname
-    .split('/')
-    .filter(segment => segment !== '');
+  const pathSegments = pathname.split("/").filter((segment) => segment !== "");
   if (pathSegments.length === 0) {
     return null;
   }
 
   const formatSegment = (segment: string, isFirstSegment: boolean) => {
-    const formatted = segment.split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    const formatted = segment
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
     return isFirstSegment ? `${formatted} page` : formatted;
   };
 
@@ -43,7 +42,7 @@ const DynamicBreadcrumbs = () => {
     <Breadcrumb>
       <BreadcrumbList>
         {pathSegments.map((segment, index) => {
-          const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
+          const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
           const isLast = index === pathSegments.length - 1;
           const isFirst = index === 0;
 
@@ -52,7 +51,9 @@ const DynamicBreadcrumbs = () => {
               {index > 0 && <BreadcrumbSeparator className="hidden md:block" />}
               <BreadcrumbItem>
                 {isLast ? (
-                  <BreadcrumbPage>{formatSegment(segment, isFirst)}</BreadcrumbPage>
+                  <BreadcrumbPage>
+                    {formatSegment(segment, isFirst)}
+                  </BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink href={href}>
                     {formatSegment(segment, isFirst)}
@@ -82,21 +83,25 @@ export default function CoreLayout({
   if (!session) {
     return null;
   }
+
+  // const [queryClient] = useState(() => new QueryClient());
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <DynamicBreadcrumbs />
-          </div>
-        </header>
-        <main className="flex flex-1 overflow-y-auto">
-          <div className="container px-6 py-2">{children}</div>
-        </main>
-      </SidebarInset>
-    </SidebarProvider>
+    <QueryClientProvider client={queryClient}>
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarInset>
+          <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+            <div className="flex items-center gap-2 px-4">
+              <SidebarTrigger className="-ml-1" />
+              <Separator orientation="vertical" className="mr-2 h-4" />
+              <DynamicBreadcrumbs />
+            </div>
+          </header>
+          <main className="flex flex-1 overflow-y-auto">
+            <div className="container px-6 py-2">{children}</div>
+          </main>
+        </SidebarInset>
+      </SidebarProvider>
+    </QueryClientProvider>
   );
 }
