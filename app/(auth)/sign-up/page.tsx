@@ -73,7 +73,6 @@ export default function SignUpPage() {
         throw new Error(data.error || "Something went wrong");
       }
       router.push("/login");
-
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -190,23 +189,23 @@ export default function SignUpPage() {
                 </FormItem>
               )}
             />
-            <CardFooter className="flex flex-col space-y-4">
-              <Button
-                type="submit"
-                className="w-full bg-ocean-500 hover:bg-ocean-600 text-white"
-              >
-                {loading ? "Creating Account..." : "Create Account"}
-              </Button>
-              <div className="text-sm text-center text-gray-500">
-                Already have an account?{" "}
-                <Link href="/login" className="text-ocean-500 hover:underline">
-                  Sign in
-                </Link>
-              </div>
-            </CardFooter>
+            <Button
+              type="submit"
+              className="w-full bg-ocean-500 hover:bg-ocean-600 text-white"
+            >
+              {loading ? "Creating Account..." : "Create Account"}
+            </Button>
           </CardContent>
         </form>
       </Form>
+      <CardFooter className="flex flex-col space-y-4">
+        <div className="text-sm text-center text-gray-500">
+          Already have an account?{" "}
+          <Link href="/login" className="text-ocean-500 hover:underline">
+            Sign in
+          </Link>
+        </div>
+      </CardFooter>
     </Card>
   );
 }

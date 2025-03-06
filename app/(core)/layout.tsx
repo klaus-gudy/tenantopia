@@ -1,10 +1,10 @@
 'use client'
 
-// import { useEffect } from "react";
-// import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 import {
   usePathname,
-  // useRouter
+  useRouter
 } from "next/navigation";
 import React from "react";
 import { AppSidebar } from "@/components/shared/app-sidebar";
@@ -70,18 +70,18 @@ const DynamicBreadcrumbs = () => {
 export default function CoreLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // const { data: session, status } = useSession();
-  // const router = useRouter();
-  // useEffect(() => {
-  //   if (status === "loading") return; // Wait for session to load
-  //   if (!session) {
-  //     router.push("/login"); // Redirect to login if not authenticated
-  //   }
-  // }, [session, status, router]);
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  useEffect(() => {
+    if (status === "loading") return;
+    if (!session) {
+      router.push("/login");
+    }
+  }, [session, status, router]);
 
-  // if (!session) {
-  //   return null;
-  // }
+  if (!session) {
+    return null;
+  }
   return (
     <SidebarProvider>
       <AppSidebar />
