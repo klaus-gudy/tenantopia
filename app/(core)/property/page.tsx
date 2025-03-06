@@ -1,3 +1,6 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -6,46 +9,39 @@ import Link from "next/link";
 import Image from "next/image";
 import RentHouse from "@/public/rent_house.png";
 
-const properties: Property[] = [
-  {
-    id: 1,
-    name: "Arcade square",
-    address: "365 Mkiwajuni ST",
-    type: "Apartment",
-    units: 10,
-    availableUnits: 5,
-    manager: "Issa Moura",
-    status: "Occupied",
-    vacantDate: "01/02/24",
-    image: "/lovable-uploads/e10c9a73-e63f-40ce-a65f-6ec377450ab9.png",
-  },
-  {
-    id: 2,
-    name: "Mwenge",
-    address: "Mwenge St",
-    type: "Condo",
-    units: 10,
-    availableUnits: 5,
-    manager: "Juma Juma",
-    status: "Vacant",
-    vacantDate: "01/01/24",
-    image: "/lovable-uploads/a5c9b9d9-2a1b-4d2b-9f3b-8c38a7a9f8f1.png",
-  },
-  {
-    id: 3,
-    name: "Mlimani City",
-    address: "Survey",
-    type: "Apartment",
-    units: 10,
-    availableUnits: 5,
-    manager: "Salim Salim",
-    status: "Occupied",
-    vacantDate: "01/04/24",
-    image: "/lovable-uploads/a5c9b9d9-2a1b-4d2b-9f3b-8c38a7a9f8f1.png",
-  },
-];
+const fetchProperties = async (): Promise<Property[]> => {
+  const response = await fetch("/api/properties");
+  if (!response.ok) {
+    throw new Error("Failed to fetch properties");
+  }
+  return response.json();
+};
 
 export default function PropertyPage() {
+  const {
+    data: properties,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["properties"],
+    queryFn: fetchProperties,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Loading properties...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500">Failed to load properties.</div>
+    );
+  }
+
   return (
     <div className="animate-fadeIn space-y-4">
       <div>
@@ -73,55 +69,66 @@ export default function PropertyPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {properties.map((property) => (
-          <Card key={property.id} className="hover:shadow-md transition-shadow overflow-hidden">
-            <div className="relative aspect-video">
-              <Image
-                src={RentHouse}
-                alt={property.name}
-                className="object-cover w-full h-full"
-              />
-              <div className="absolute top-2 left-2">
-                <span
-                  className={`px-2 py-1 rounded-full text-xs ${
-                    property.type === "Apartment"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-yellow-100 text-yellow-700"
-                  }`}
-                >
-                  {property.type}
-                </span>
-              </div>
-            </div>
-            <div className="p-4 space-y-2">
-              <div className="flex justify-between gap-4 items-center">
-                <div>
-                  <p className="text-sm font-medium">{property.name}</p>
-                  <div className="flex items-center text-muted-foreground mt-2">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    <p className="text-sm truncate">{property.address}</p>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center">
-                    <span className="text-sm">{property.units} Units</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mt-2">
-                    <Building className="h-4 w-4 mr-1" />
-                    <span className="text-sm">
-                      {property.availableUnits} Available
-                    </span>
-                  </div>
+      {properties?.length ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {properties.map((property) => (
+            <Card
+              key={property.id}
+              className="hover:shadow-md transition-shadow overflow-hidden"
+            >
+              <div className="relative aspect-video">
+                <Image
+                  src={RentHouse}
+                  alt={property.name}
+                  className="object-cover w-full h-full"
+                />
+                <div className="absolute top-2 left-2">
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs ${
+                      property.type === "Apartment"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-yellow-100 text-yellow-700"
+                    }`}
+                  >
+                    {property.type}
+                  </span>
                 </div>
               </div>
-              <Button variant="secondary" className="w-full" asChild>
-                <Link href={`/property/${property.id}?name=${property.name}`}>View listing</Link>
-              </Button>
-            </div>
-          </Card>
-        ))}
-      </div>
+              <div className="p-4 space-y-2">
+                <div className="flex justify-between gap-4 items-center">
+                  <div>
+                    <p className="text-sm font-medium">{property.name}</p>
+                    <div className="flex items-center text-muted-foreground mt-2">
+                      <MapPin className="h-4 w-4 mr-1" />
+                      <p className="text-sm truncate">{property.address}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center">
+                      <span className="text-sm">{property.units} Units</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mt-2">
+                      <Building className="h-4 w-4 mr-1" />
+                      <span className="text-sm">
+                        {property.availableUnits} Available
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <Button variant="secondary" className="w-full" asChild>
+                  <Link href={`/property/${property.id}?name=${property.name}`}>
+                    View listing
+                  </Link>
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center text-muted-foreground">
+          No properties found. Add a new property to get started.
+        </div>
+      )}
     </div>
   );
 }

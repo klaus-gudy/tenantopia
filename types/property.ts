@@ -6,9 +6,9 @@ interface Property {
     units: number;
     availableUnits: number;
     manager: string;
-    status: "Occupied" | "Vacant";
-    vacantDate: string;
-    image: string;
+    status?: "Occupied" | "Vacant";
+    vacantDate?: string;
+    image?: string;
 }
 
 interface Unit {
