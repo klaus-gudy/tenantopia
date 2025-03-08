@@ -135,6 +135,9 @@ model Property {
   street      String
   address     String
   description String?
+  yearBuilt   Int?
+  floors      Int?
+  squareFootage Float?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   managerId   String?
@@ -156,6 +159,8 @@ model Unit {
   livingRoom          Boolean
   balcony             Boolean
   parking             Boolean
+  minLeaseTerm        Int?
+  monthlyRent         Float?
   isOccupied          Boolean
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
