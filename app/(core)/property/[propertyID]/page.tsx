@@ -1,21 +1,53 @@
+'use client';
+
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useQuery } from "@tanstack/react-query";
 import UnitDetails from "@/components/property/unit-details";
+
+const fetchPropertyDetails = async (propertyID: string): Promise<PropertyDetails> => {
+  const response = await fetch(`/api/properties/${propertyID}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch property details");
+  }
+  return response.json();
+};
 
 export default function PropertyDetailsPage({
   params,
   searchParams,
 }: {
-  params: {propertyID: string};
-  searchParams: {name: string};
+  params: { propertyID: string };
+  searchParams: { name: string };
 }) {
+  const {
+    data: property,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["property", params.propertyID],
+    queryFn: () => fetchPropertyDetails(params.propertyID),
+  });
+
+  if (isLoading) {
+    return <div className="flex items-center justify-center h-screen">Loading property details...</div>;
+  }
+
+  if (isError) {
+    return <div className="text-center text-red-500">Error: {error.message}</div>;
+  }
+
+  const propertyDetails = [
+    { label: "Address", value: property?.address },
+    { label: "Property type", value: property?.type },
+    { label: "City", value: property?.city },
+    { label: "District", value: property?.district },
+    { label: "Street", value: property?.street },
+  ];
+
   return (
     <div className="animate-fadeIn space-y-6">
       <div className="flex items-center gap-2">
@@ -26,7 +58,7 @@ export default function PropertyDetailsPage({
         </Button>
         <div>
           <h1 className="text-xl font-semibold tracking-tight">
-          {searchParams.name} details
+            {searchParams.name} details
           </h1>
           <p className="text-sm text-muted-foreground">
             View more details about this property
@@ -42,37 +74,23 @@ export default function PropertyDetailsPage({
             </CardHeader>
             <CardContent>
               <div className="grid gap-2 grid-cols-2">
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Address
-                  </label>
-                  <p className="text-sm font-medium">365 Mkiwajuni ST</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Property type
-                  </label>
-                  <p className="text-sm font-medium">Residential</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Year built
-                  </label>
-                  <p className="text-sm font-medium">2010</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Total square footage
-                  </label>
-                  <p className="text-sm font-medium">1,500 sq ft</p>
-                </div>
+                {propertyDetails.map((detail, index) => (
+                  <div key={index}>
+                    <label className="text-sm text-muted-foreground">
+                      {detail.label}
+                    </label>
+                    <p className="text-sm font-medium">{detail.value}</p>
+                  </div>
+                ))}
               </div>
               <div className="mt-2">
-                  <label className="text-sm text-muted-foreground">
-                    Description
-                  </label>
-                  <p className="text-sm font-medium">A beautiful apartment complex with modern amenities, located in the heart of Los Angeles with easy access to public transportation, shopping centers, and entertainment venues.</p>
-                </div>
+                <label className="text-sm text-muted-foreground">
+                  Description
+                </label>
+                <p className="text-sm font-medium">
+                {property?.description}
+                </p>
+              </div>
               <div className="flex gap-4 mt-4 justify-end">
                 <Button>Edit details</Button>
               </div>

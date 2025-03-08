@@ -48,3 +48,33 @@ interface TimelineEvent {
         avatar: string
     }
 }
+
+interface PropertyDetails {
+    id: string;
+    name: string;
+    address: string;
+    type: string;
+    city: string;
+    district: string;
+    street: string;
+    description?: string;
+    createdAt: string;
+    updatedAt: string;
+    manager: string | null;
+    units: {
+      id: string;
+      name: string;
+      description: string;
+      size: number;
+      price: number;
+      rooms: number;
+      kitchen: boolean;
+      bathroom: boolean;
+      livingRoom: boolean;
+      balcony: boolean;
+      parking: boolean;
+      isOccupied: boolean;
+      createdAt: string;
+      updatedAt: string;
+    }[];
+}
