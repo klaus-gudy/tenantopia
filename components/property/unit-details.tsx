@@ -14,7 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Plus, Users } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
-import { Badge } from "../ui/badge";
+import { Badge } from "@/components/ui/badge";
 
 export default function UnitDetails({
   propertyID,
@@ -81,50 +81,54 @@ export default function UnitDetails({
           </Dialog>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 mt-0">
-            {units.map((unit) => (
+            {units.length > 0 ? (
+            <div className="grid gap-4 mt-0">
+              {units.map((unit) => (
               <Link
                 href={`/property/${propertyID}/${unit.id}`}
                 key={unit.id}
                 className="border rounded-lg p-4 space-y-2 hover:bg-accent transition-colors"
               >
                 <div className="relative flex items-center justify-between">
-                  <h3 className="font-semibold">{unit.name}</h3>
-                  <Badge variant={unit.isOccupied ? "secondary" : "default"}>
-                    {unit.isOccupied ? "Occupied" : "Vacant"}
-                  </Badge>
+                <h3 className="font-semibold">{unit.name}</h3>
+                <Badge variant={unit.isOccupied ? "secondary" : "default"}>
+                  {unit.isOccupied ? "Occupied" : "Vacant"}
+                </Badge>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-sm pt-1">
-                  <div className="col-span-4">
-                    {(() => {
-                      const features = [];
-                      if (unit.bathrooms) features.push("Bathroom");
-                      if (unit.kitchen) features.push("Kitchen");
-                      if (unit.livingRoom) features.push("Living Room");
-                      if (unit.balcony) features.push("Balcony");
-                      if (unit.rooms > 1) features.push(`${unit.rooms} Rooms`);
-                      return features.join(" / ");
-                    })()}
-                    <div className="pt-2">
-                      <span className="text-muted-foreground">Rent:</span>{" "}
-                      {unit.monthlyRent
-                        ? unit.monthlyRent.toLocaleString()
-                        : "0"}{" "}
-                      TZS
-                    </div>
-                  </div>
-                  <div className="col-start-5">
-                    {unit.tenant && (
-                      <div className="flex items-center">
-                        <Users className="h-4 w-4 mr-2" />
-                        <span>{unit.tenant}</span>
-                      </div>
-                    )}
+                <div className="col-span-4">
+                  {(() => {
+                  const features = [];
+                  if (unit.bathrooms) features.push("Bathroom");
+                  if (unit.kitchen) features.push("Kitchen");
+                  if (unit.livingRoom) features.push("Living Room");
+                  if (unit.balcony) features.push("Balcony");
+                  if (unit.rooms > 1) features.push(`${unit.rooms} Rooms`);
+                  return features.join(" / ");
+                  })()}
+                  <div className="pt-2">
+                  <span className="text-muted-foreground">Rent:</span>{" "}
+                  {unit.monthlyRent
+                    ? unit.monthlyRent.toLocaleString()
+                    : "0"}{" "}
+                  TZS
                   </div>
                 </div>
+                <div className="col-start-5">
+                  {unit.tenant && (
+                  <div className="flex items-center">
+                    <Users className="h-4 w-4 mr-2" />
+                    <span>{unit.tenant}</span>
+                  </div>
+                  )}
+                </div>
+                </div>
               </Link>
-            ))}
-          </div>
+              ))}
+            </div>
+            ) : (
+            <p>No units available.</p>
+            )}
         </CardContent>
       </div>
     </Card>
