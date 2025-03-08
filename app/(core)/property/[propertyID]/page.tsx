@@ -107,7 +107,7 @@ export default function PropertyDetailsPage({
         </div>
 
         <div className="space-y-6">
-          <UnitDetails propertyID={params.propertyID} />
+          <UnitDetails propertyID={params.propertyID} units={property?.units || []} />
         </div>
       </div>
     </div>

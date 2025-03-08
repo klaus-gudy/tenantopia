@@ -13,15 +13,18 @@ interface Property {
 
 interface Unit {
     id: string;
-    number: string;
-    bedrooms: number;
-    livingArea: boolean;
-    bathrooms: boolean;
+    name: string;
+    description: string;
+    size: number;
+    price: number;
+    rooms: number;
     kitchen: boolean;
+    bathrooms: boolean;
     livingRoom: boolean;
+    balcony: boolean;
     minLeaseTerm: number;
     monthlyRent: number;
-    status: "Occupied" | "Vacant";
+    isOccupied: boolean;
     tenant?: string;
 }
 
@@ -61,20 +64,5 @@ interface PropertyDetails {
     createdAt: string;
     updatedAt: string;
     manager: string | null;
-    units: {
-      id: string;
-      name: string;
-      description: string;
-      size: number;
-      price: number;
-      rooms: number;
-      kitchen: boolean;
-      bathroom: boolean;
-      livingRoom: boolean;
-      balcony: boolean;
-      parking: boolean;
-      isOccupied: boolean;
-      createdAt: string;
-      updatedAt: string;
-    }[];
+    units: Unit[];
 }
