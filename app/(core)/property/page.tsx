@@ -116,7 +116,7 @@ export default function PropertyPage() {
                   </div>
                 </div>
                 <Button variant="secondary" className="w-full" asChild>
-                  <Link href={`/property/${property.id}?name=${property.name}`}>
+                  <Link href={`/property/${property.id}`}>
                     View listing
                   </Link>
                 </Button>

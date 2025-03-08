@@ -17,10 +17,8 @@ const fetchPropertyDetails = async (propertyID: string): Promise<PropertyDetails
 
 export default function PropertyDetailsPage({
   params,
-  searchParams,
 }: {
   params: { propertyID: string };
-  searchParams: { name: string };
 }) {
   const {
     data: property,
@@ -58,7 +56,7 @@ export default function PropertyDetailsPage({
         </Button>
         <div>
           <h1 className="text-xl font-semibold tracking-tight">
-            {searchParams.name} details
+            {property?.name} details
           </h1>
           <p className="text-sm text-muted-foreground">
             View more details about this property
