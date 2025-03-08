@@ -28,6 +28,32 @@ interface Unit {
     tenant?: string;
 }
 
+interface UnitDetails {
+    id: string;
+    name: string;
+    description: string;
+    size: number;
+    price: number;
+    rooms: number;
+    kitchen: boolean;
+    bathroom: boolean;
+    livingRoom: boolean;
+    balcony: boolean;
+    parking: boolean;
+    isOccupied: boolean;
+    createdAt: string;
+    updatedAt: string;
+    tenants: {
+        id: string;
+        name: string;
+        email: string;
+        phone: string;
+        moveInDate: string;
+        moveOutDate?: string;
+        avatar?: string;
+    }[];
+}
+
 interface TimelineEvent {
     id: string
     date: Date
