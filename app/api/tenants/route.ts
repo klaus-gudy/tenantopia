@@ -1,13 +1,50 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { auth } from "@/lib/auth";
 
 export async function GET() {
+  try {
+    let session;
     try {
-        const tenants = await prisma.tenant.findMany();
-        return NextResponse.json(tenants);
+      session = await auth();
     } catch (error) {
-        return NextResponse.json({ error: 'Error fetching tenants' }, { status: 500 });
+      console.error("Authentication error:", error);
+      return NextResponse.json({ error: "Authentication failed" }, { status: 401 });
     }
+    if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      include: {
+        owner: { include: { properties: { include: { units: true } } } },
+        manager: { include: { assignedProperties: { include: { units: true } } } },
+        tenant: true
+      }
+    });
+
+    if (user?.owner) {
+      const unitIds = user.owner.properties.flatMap(property => property.units.map(unit => unit.id));
+      const tenants = await prisma.tenant.findMany({
+        where: {
+          leases: {
+            some: {
+              unitId: { in: unitIds }
+            }
+          }
+        },
+        include: {
+          user: true,
+          leases: { include: { unit: { include: { property: true } } } }
+        }
+      });
+      return NextResponse.json(tenants);
+    }
+    return NextResponse.json({ error: "No properties found for the user" }, { status: 404 });
+  } catch (error) {
+    console.error("Error fetching tenants:", error);
+    return NextResponse.json({ error: "Error fetching tenants" }, { status: 500 });
+  }
 }
 
 // export async function POST(req: Request) {
