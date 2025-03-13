@@ -38,7 +38,21 @@ export async function GET() {
           leases: { include: { unit: { include: { property: true } } } }
         }
       });
-      return NextResponse.json(tenants);
+
+      const transformedTenants = tenants.map(tenant => {
+        const lease = tenant.leases[0]; // Assume the latest lease
+        return {
+          id: tenant.id,
+          name: tenant.user.name,
+          phone: tenant.user.phone,
+          property: lease?.unit?.property.name || "Unknown Property",
+          unit: lease?.unit?.name || "Unknown Unit",
+          duration: lease ? `${new Date(lease.startDate).toLocaleDateString()} - ${new Date(lease.endDate).toLocaleDateString()}` : "N/A",
+          image: `https://api.dicebear.com/7.x/identicon/svg?seed=${tenant.user.name}`,
+        };
+      });
+
+      return NextResponse.json(transformedTenants);
     }
     return NextResponse.json({ error: "No properties found for the user" }, { status: 404 });
   } catch (error) {

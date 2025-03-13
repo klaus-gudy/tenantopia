@@ -3,6 +3,7 @@ export interface Tenant {
     name: string;
     phone: string;
     property: string;
+    unit: string;
     duration: string;
     image: string;
 }
